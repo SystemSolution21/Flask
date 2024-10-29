@@ -13,11 +13,11 @@ db = SQLAlchemy(app=app)
 
 # Create database
 class Contact(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), nullable=False)
-    email = db.Column(db.String(120), nullable=False)
-    message = db.Column(db.Text, nullable=False)
-    date_submitted = db.Column(db.DateTime, default=datetime.utcnow)
+    id: int = db.Column(db.Integer, primary_key=True)
+    name: str = db.Column(db.String(100), nullable=False)
+    email: str = db.Column(db.String(120), nullable=False)
+    message: str = db.Column(db.Text, nullable=False)
+    date_submitted: datetime = db.Column(db.DateTime, default=datetime.utcnow)
 
 
 # route home.html
@@ -33,21 +33,21 @@ def about() -> str:
 
 
 # route contact.html
-@app.route("/contact", methods=["GET", "POST"])
+@app.route(rule="/contact", methods=["GET", "POST"])
 def contact():
     if request.method == "POST":
-        name = request.form.get("name")
-        email = request.form.get("email")
-        message = request.form.get("message")
+        name: str | None = request.form.get(key="name")
+        email: str | None = request.form.get(key="email")
+        message: str | None = request.form.get(key="message")
 
         new_contact: Contact = Contact(name=name, email=email, message=message)  # type: ignore
-        db.session.add(new_contact)
+        db.session.add(instance=new_contact)
         db.session.commit()
 
-        flash("Your message has been sent!", "success")
-        return redirect(url_for("contact"))
+        flash(message="Your message has been sent!", category="success")
+        return redirect(location=url_for(endpoint="contact"))
 
-    return render_template("contact.html")
+    return render_template(template_name_or_list="contact.html")
 
 
 if __name__ == "__main__":
