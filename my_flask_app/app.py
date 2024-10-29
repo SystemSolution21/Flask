@@ -1,11 +1,13 @@
 from flask import Flask, render_template, request, flash, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+from config import Config
+
 
 # Initialize app
 app = Flask(import_name=__name__)
-app.config["SECRET_KEY"] = "123abc"
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///site.db"
+app.config["SECRET_KEY"] = Config.SECRET_KEY
+app.config["SQLALCHEMY_DATABASE_URI"] = Config.DATABASE_URL
 db = SQLAlchemy(app=app)
 
 

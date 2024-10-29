@@ -1,4 +1,7 @@
 .venv
 poetry.lock
 .vscode
-site.db
+instance/
+.env
+app_pra.py
+__pycache__
