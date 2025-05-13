@@ -1,7 +1,17 @@
+# Virtual environment
 .venv
+
+# Poetry lock file
 poetry.lock
+
+# Visual Studio Code
 .vscode
+
+# Flask instance folder
 instance/
+
+# Environment variables
 .env
-app_pra.py
+
+# Python cache files
 __pycache__
